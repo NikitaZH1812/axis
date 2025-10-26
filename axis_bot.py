@@ -23,7 +23,7 @@ from telegram.ext import (
 )
 
 # ---------------------- Config ----------------------
-DATA_DIR = Path("data")
+DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
 DATA_DIR.mkdir(exist_ok=True, parents=True)
 
 # Model hyperparams (MVP defaults)
