@@ -21,6 +21,8 @@ from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     ConversationHandler, ContextTypes, filters
 )
+import telegram
+print("[Axis bot] python-telegram-bot version:", telegram.__version__)
 
 # ---------------------- Config ----------------------
 DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
