@@ -21,8 +21,21 @@ from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     ConversationHandler, ContextTypes, filters
 )
-import telegram
-print("[Axis bot] python-telegram-bot version:", telegram.__version__)
+
+from sweet_spots import save_log, recalculate_all_sweet_spots, get_sweet_spots
+
+def on_all_inputs_received(user_id, mood, sleep, activity, focus, social):
+    # 1) зберігаємо лог
+    save_log(user_id, mood, sleep, activity, focus, social)
+
+    # 2) оновлюємо sweet spots (коли даних ≥10 днів — побачиш логи)
+    recalculate_all_sweet_spots(user_id)
+
+    # 3) (опційно) дістаємо поточні sweet spots і використовуємо у розрахунках Stability
+    spots = get_sweet_spots(user_id)
+    # ...тут твоя логіка розрахунку Stability/Life Score з урахуванням spots ...
+
+
 
 # ---------------------- Config ----------------------
 DATA_DIR = Path(os.getenv("DATA_DIR", "data"))
